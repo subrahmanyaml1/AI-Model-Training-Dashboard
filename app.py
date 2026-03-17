@@ -24,14 +24,6 @@ from sklearn.metrics import accuracy_score, r2_score
 st.set_page_config(page_title="ML Model Trainer Pro", page_icon="🤖", layout="wide")
 
 # ---------------- CUSTOM CSS ----------------
-# ---------------- CUSTOM CSS ----------------
-# ---------------- CUSTOM CSS ----------------
-# ---------------- CUSTOM CSS ----------------
-# ---------------- CUSTOM CSS ----------------
-# ---------------- CUSTOM CSS ----------------
-# ---------------- CUSTOM CSS ----------------
-# ---------------- CUSTOM CSS ----------------
-# ---------------- CUSTOM CSS ----------------
 st.markdown("""
 <style>
 
