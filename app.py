@@ -147,7 +147,7 @@ label {
 
 
 # ---------------- TITLE ----------------
-st.markdown('<div class="main-title">🤖 AI Model Training Dashboard</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-title">🤖 ML Model Training Dashboard</div>', unsafe_allow_html=True)
 
 # ---------------- SIDEBAR ----------------
 st.sidebar.title("⚙️ Control Panel")
