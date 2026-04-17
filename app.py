@@ -222,7 +222,8 @@ if uploaded_file is not None:
         X = X.drop(columns=high_unique_cols)
 
     # ---------------- PROBLEM TYPE ----------------
-    if y.dtype == "object" or y.nunique() <= 20:
+    # ---------------- PROBLEM TYPE ----------------
+    if not pd.api.types.is_numeric_dtype(y) or y.nunique() <= 20:
         problem_type = "Classification"
     else:
         problem_type = "Regression"
@@ -248,25 +249,25 @@ if uploaded_file is not None:
             X[col] = X[col].fillna(X[col].median())
 
     # ---------------- TARGET NULL ----------------
-if pd.api.types.is_numeric_dtype(y):
-    y = pd.to_numeric(y, errors="coerce")
-    y = y.replace([np.inf, -np.inf], np.nan)
+    if pd.api.types.is_numeric_dtype(y):
+        y = pd.to_numeric(y, errors="coerce")
+        y = y.replace([np.inf, -np.inf], np.nan)
 
-    if y.notna().sum() > 0:
-        y = y.fillna(y.median())
+        if y.notna().sum() > 0:
+            y = y.fillna(y.median())
+        else:
+            y = y.fillna(0)
+
     else:
-        y = y.fillna(0)
+        y = y.astype("string")
+        y = y.replace(["", "nan", "None"], np.nan)
 
-else:
-    y = y.astype("string")
-    y = y.replace(["", "nan", "None"], np.nan)
+        mode_val = y.mode(dropna=True)
 
-    mode_val = y.mode(dropna=True)
-
-    if len(mode_val) > 0:
-        y = y.fillna(mode_val.iloc[0])
-    else:
-        y = y.fillna("Unknown")
+        if len(mode_val) > 0:
+            y = y.fillna(mode_val.iloc[0])
+        else:
+            y = y.fillna("Unknown")
     # ---------------- ENCODING ----------------
     categorical_cols = X.select_dtypes(include='object').columns.tolist()
 
@@ -290,9 +291,9 @@ else:
             encoders[col] = le
 
     # ---------------- TARGET ENCODING ----------------
-    if y.dtype == "object":
+    if problem_type == "Classification" and not pd.api.types.is_numeric_dtype(y):
         target_encoder = LabelEncoder()
-        y = target_encoder.fit_transform(y)
+        y = target_encoder.fit_transform(y.astype(str))
     else:
         target_encoder = None
 
