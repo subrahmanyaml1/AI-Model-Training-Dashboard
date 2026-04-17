@@ -426,4 +426,4 @@ if uploaded_file is not None:
 
         st.success(prediction[0])
 
-        st.markdown('</div>', unsafe_allow_html=True))
+        st.markdown('</div>', unsafe_allow_html=True)
