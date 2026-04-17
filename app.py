@@ -248,11 +248,25 @@ if uploaded_file is not None:
             X[col] = X[col].fillna(X[col].median())
 
     # ---------------- TARGET NULL ----------------
-    if y.dtype == "object":
-        y = y.fillna(y.mode()[0])
-    else:
-        y = y.fillna(y.median())
+if pd.api.types.is_numeric_dtype(y):
+    y = pd.to_numeric(y, errors="coerce")
+    y = y.replace([np.inf, -np.inf], np.nan)
 
+    if y.notna().sum() > 0:
+        y = y.fillna(y.median())
+    else:
+        y = y.fillna(0)
+
+else:
+    y = y.astype("string")
+    y = y.replace(["", "nan", "None"], np.nan)
+
+    mode_val = y.mode(dropna=True)
+
+    if len(mode_val) > 0:
+        y = y.fillna(mode_val.iloc[0])
+    else:
+        y = y.fillna("Unknown")
     # ---------------- ENCODING ----------------
     categorical_cols = X.select_dtypes(include='object').columns.tolist()
 
