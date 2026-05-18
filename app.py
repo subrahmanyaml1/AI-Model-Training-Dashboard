@@ -21,7 +21,7 @@ from sklearn.metrics import accuracy_score, r2_score
 
 
 # ---------------- PAGE CONFIG ----------------
-st.set_page_config(page_title="ML Model Trainer Pro", page_icon="🤖", layout="wide")
+st.set_page_config(page_title="ML Model Evaluation Trainer Pro", page_icon="🤖", layout="wide")
 
 # ---------------- CUSTOM CSS ----------------
 st.markdown("""
