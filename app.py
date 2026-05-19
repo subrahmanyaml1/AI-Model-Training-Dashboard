@@ -20,6 +20,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import accuracy_score, r2_score
 
 
+
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(page_title="ML Model Trainer Pro", page_icon="🤖", layout="wide")
 
@@ -147,7 +148,7 @@ label {
 """, unsafe_allow_html=True)
 
 # ---------------- TITLE ----------------
-st.markdown('<div class="main-title">🤖 ML Model Evaluation Training Dashboard</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-title">🤖 ML Evaluation Training Dashboard</div>', unsafe_allow_html=True)
 
 # ---------------- SIDEBAR ----------------
 st.sidebar.title("⚙️ Control Panel")
