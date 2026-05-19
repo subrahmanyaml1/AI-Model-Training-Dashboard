@@ -21,7 +21,8 @@ from sklearn.metrics import accuracy_score, r2_score
 
 
 # ---------------- PAGE CONFIG ----------------
-st.set_page_config(page_title="ML Model Evaluation Trainer Pro", page_icon="🤖", layout="wide")
+st.set_page_config(page_title="ML Model Trainer Pro", page_icon="🤖", layout="wide")
+
 
 # ---------------- CUSTOM CSS ----------------
 st.markdown("""
@@ -145,7 +146,6 @@ label {
 </style>
 """, unsafe_allow_html=True)
 
-
 # ---------------- TITLE ----------------
 st.markdown('<div class="main-title">🤖 ML Model Evaluation Training Dashboard</div>', unsafe_allow_html=True)
 
@@ -221,7 +221,6 @@ if uploaded_file is not None:
     if high_unique_cols:
         X = X.drop(columns=high_unique_cols)
 
-    # ---------------- PROBLEM TYPE ----------------
     # ---------------- PROBLEM TYPE ----------------
     if not pd.api.types.is_numeric_dtype(y) or y.nunique() <= 20:
         problem_type = "Classification"
